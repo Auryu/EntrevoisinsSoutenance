@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -51,8 +52,6 @@ public class NeighbourProfileActivity extends AppCompatActivity {
     public TextView mMessageUI;
     public NeighbourApiService mApiService;
 
-    public static final String FAVORITE_NEIGHBOUR = "favoriteNeighbour";
-    private int pos;
     Neighbour neighbour;
 
     @Override
@@ -66,8 +65,7 @@ public class NeighbourProfileActivity extends AppCompatActivity {
         /** Get neighbour with Extra */
         Intent neighbourProfileActivityIntent = getIntent();
         if (neighbourProfileActivityIntent != null) {
-            pos = neighbourProfileActivityIntent.getIntExtra("position", 0);
-            neighbour = mApiService.getNeighbours().get(pos);
+            neighbour = neighbourProfileActivityIntent.getParcelableExtra("neighbour");
             String neighbourName = "";
             neighbourName = neighbour.getName();
 
@@ -82,7 +80,8 @@ public class NeighbourProfileActivity extends AppCompatActivity {
 
             /** On click set Favorite Neighbour */
             mFavoriteButton.setOnClickListener(v -> {
-                mApiService.updateNeighbour(pos);
+                neighbour.setFavorite(!neighbour.isFavorite());
+                mApiService.updateNeighbour(neighbour);
                 updateImageFavorite();
             });
 

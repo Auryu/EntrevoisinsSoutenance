@@ -35,6 +35,8 @@ public class Neighbour implements Parcelable {
     protected Neighbour(Parcel in) {
         name = in.readString();
         avatarUrl = in.readString();
+        id = in.readInt();
+        isFavorite = in.readInt() != 0;
     }
 
     public static final Creator<Neighbour> CREATOR = new Creator<Neighbour>() {
@@ -95,9 +97,11 @@ public class Neighbour implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int flags) {
         parcel.writeString(name);
         parcel.writeString(avatarUrl);
+        parcel.writeInt(id);
+        parcel.writeInt (isFavorite ? 1 : 0);
     }
 
 

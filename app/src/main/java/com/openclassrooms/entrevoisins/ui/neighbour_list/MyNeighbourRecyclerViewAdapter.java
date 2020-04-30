@@ -72,7 +72,7 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
             public void onClick(View v) {
                 Context context = v.getContext();
                 Intent neighbourProfileActivityIntent = new Intent(context, NeighbourProfileActivity.class);
-                neighbourProfileActivityIntent.putExtra("position", position);
+                neighbourProfileActivityIntent.putExtra("neighbour", neighbour);
                 context.startActivity(neighbourProfileActivityIntent);
             }
         });

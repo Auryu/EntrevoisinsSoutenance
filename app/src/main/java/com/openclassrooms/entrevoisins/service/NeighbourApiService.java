@@ -18,7 +18,7 @@ public interface NeighbourApiService {
 
     List<Neighbour> getFavorites();
 
-    void updateNeighbour(int position);
+    void updateNeighbour(Neighbour neighbour);
 
     /**
      * Deletes a neighbour

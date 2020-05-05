@@ -40,34 +40,34 @@ public class NeighbourServiceTest {
 
     @Test
     public void deleteNeighbourWithSuccess() {
-        Neighbour neighbourToDelete = service.getNeighbours().get(0);
+        Neighbour neighbourToDelete = service.getNeighbours().get(5);
         service.deleteNeighbour(neighbourToDelete);
         assertFalse(service.getNeighbours().contains(neighbourToDelete));
     }
 
     @Test
     public void updateNeighbourWithSuccess() {
-        Neighbour updateNeighbourToFavorite = service.getNeighbours().get(0);
-        assertFalse(updateNeighbourToFavorite.isFavorite());
-        service.updateNeighbour(0);
-        assertTrue(updateNeighbourToFavorite.isFavorite());
-        service.updateNeighbour(0);
-        assertFalse(updateNeighbourToFavorite.isFavorite());
+        Neighbour neighbourToFavorite = service.getNeighbours().get(3);
+        assertFalse(neighbourToFavorite.isFavorite());
+        service.updateNeighbour(neighbourToFavorite);
+        assertTrue(neighbourToFavorite.isFavorite());
+        service.updateNeighbour(neighbourToFavorite);
+        assertFalse(neighbourToFavorite.isFavorite());
     }
 
-    @Test
-    public void getFavoritesWithSuccess() {
-        List<Neighbour> favoriteNeighbours = service.getFavorites();
-        assertThat(favoriteNeighbours, IsEmptyCollection.empty());
-        Neighbour updateNeighbourToFavorite = service.getNeighbours().get(0);
-        assertFalse(updateNeighbourToFavorite.isFavorite());
-        service.updateNeighbour(0);
-        favoriteNeighbours = service.getFavorites();
-        assertThat(favoriteNeighbours.size(), is(1));
-        assertTrue(favoriteNeighbours.contains(updateNeighbourToFavorite));
-        service.updateNeighbour(0);
-        favoriteNeighbours = service.getFavorites();
-        assertThat(favoriteNeighbours.size(), is(0));
-        assertFalse(favoriteNeighbours.contains(updateNeighbourToFavorite));
-    }
+     @Test
+     public void getFavoritesWithSuccess() {
+         List<Neighbour> favoriteNeighbours = service.getFavorites();
+         assertThat(favoriteNeighbours, IsEmptyCollection.empty());
+         Neighbour neighbourToFavorite = service.getNeighbours().get(0);
+         assertFalse(neighbourToFavorite.isFavorite());
+         service.updateNeighbour(neighbourToFavorite);
+         favoriteNeighbours = service.getFavorites();
+         assertThat(favoriteNeighbours.size(), is(1));
+         assertTrue(favoriteNeighbours.contains(neighbourToFavorite));
+         service.updateNeighbour(neighbourToFavorite);
+         favoriteNeighbours = service.getFavorites();
+         assertThat(favoriteNeighbours.size(), is(0));
+         assertFalse(favoriteNeighbours.contains(neighbourToFavorite));
+     }
 }

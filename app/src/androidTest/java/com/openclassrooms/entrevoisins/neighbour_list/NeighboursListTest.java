@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 
 import java.util.List;
 
+import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -32,6 +33,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withSubstring;
+import static android.support.test.espresso.matcher.ViewMatchers.withTagKey;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.openclassrooms.entrevoisins.utils.RecyclerViewItemCountAssertion.withItemCount;
 import static org.hamcrest.Matchers.allOf;
@@ -93,7 +95,7 @@ public class NeighboursListTest {
     public void myNeighbourList_clickAction_shouldLaunchNeighbourProfile() {
         // When perform a click on this neighbour
         onView(allOf(withId(R.id.list_neighbours), isDisplayed()))
-                .perform(actionOnItemAtPosition(0, click()));
+                .perform(actionOnItemAtPosition(5, click()));
         // Check that profile page was launch
         onView(withId(R.id.name1))
                 .check(matches(isDisplayed()));
@@ -106,10 +108,10 @@ public class NeighboursListTest {
     public void myNeighbourList_VerifyNeighbourName_shouldFindTheSameName() {
         // When perform a click on this neighbour
         onView(allOf(withId(R.id.list_neighbours), isDisplayed()))
-                .perform(actionOnItemAtPosition(0, click()));
+                .perform(actionOnItemAtPosition(2, click()));
         // Check that's the good Neighbour's profile
         onView(withId(R.id.name1))
-                .check(matches(withText("Caroline")));
+                .check(matches(withText("Chloé")));
     }
 
     /**

@@ -80,8 +80,8 @@ public class NeighbourProfileActivity extends AppCompatActivity {
 
             /** On click set Favorite Neighbour */
             mFavoriteButton.setOnClickListener(v -> {
-                neighbour.setFavorite(!neighbour.isFavorite());
                 mApiService.updateNeighbour(neighbour);
+                neighbour.setFavorite(!neighbour.isFavorite());
                 updateImageFavorite();
             });
 

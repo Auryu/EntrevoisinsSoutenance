@@ -18,6 +18,10 @@ public interface NeighbourApiService {
 
     List<Neighbour> getFavorites();
 
+    /**
+     * Change Neighbour to favoriteNeighbour
+     * @param neighbour
+     */
     void updateNeighbour(Neighbour neighbour);
 
     /**

@@ -1,6 +1,8 @@
 Executer et compiler l'application Entrevoisins :
 
-- Télécharger Android Studio : https://developer.android.com/studio
+- Télécharger Android Studio à cette adresse : https://developer.android.com/studio
+![image](https://user-images.githubusercontent.com/55693330/81480063-70149b80-9227-11ea-8f19-6673fdfa226c.png)
+
 - Au lancement d'Android Studio sélectionner : "Check out project from Version Control" puis Git
 ![image](https://user-images.githubusercontent.com/55693330/81478702-4192c280-921f-11ea-8ff3-8dc7b001080f.png)
 ![image](https://user-images.githubusercontent.com/55693330/81478795-d695bb80-921f-11ea-8968-29ad7a536170.png)

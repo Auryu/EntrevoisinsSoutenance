@@ -12,6 +12,7 @@ import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.ui.neighbour_list.ListNeighbourActivity;
 import com.openclassrooms.entrevoisins.utils.DeleteViewAction;
 
+import org.hamcrest.Matcher;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -28,6 +29,7 @@ import static android.support.test.espresso.contrib.ViewPagerActions.scrollLeft;
 import static android.support.test.espresso.contrib.ViewPagerActions.scrollRight;
 import static android.support.test.espresso.matcher.ViewMatchers.assertThat;
 import static android.support.test.espresso.matcher.ViewMatchers.hasChildCount;
+import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static android.support.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -37,9 +39,9 @@ import static android.support.test.espresso.matcher.ViewMatchers.withTagKey;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.openclassrooms.entrevoisins.utils.RecyclerViewItemCountAssertion.withItemCount;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.anyOf;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.core.IsNull.notNullValue;
-
 
 
 /**
@@ -52,6 +54,10 @@ public class NeighboursListTest {
     private static int ITEMS_COUNT = 12;
 
     private ListNeighbourActivity mActivity;
+
+    public static com.openclassrooms.entrevoisins.neighbour_list.RecyclerViewMatcher withRecyclerView(final int recyclerViewId) {
+        return new com.openclassrooms.entrevoisins.neighbour_list.RecyclerViewMatcher(recyclerViewId);
+    }
 
     @Rule
     public ActivityTestRule<ListNeighbourActivity> mActivityRule =
@@ -106,16 +112,20 @@ public class NeighboursListTest {
      */
     @Test
     public void myNeighbourList_VerifyNeighbourName_shouldFindTheSameName() {
+        //Check the name of the first neighbour
+        onView(withRecyclerView(R.id.list_neighbours).atPosition(0))
+                .check(matches(hasDescendant(withText("Caroline"))));
         // When perform a click on this neighbour
-        onView(allOf(withId(R.id.list_neighbours), isDisplayed()))
-                .perform(actionOnItemAtPosition(2, click()));
+        onView(withRecyclerView(R.id.list_neighbours).atPosition(0))
+                        .perform(click());
         // Check that's the good Neighbour's profile
         onView(withId(R.id.name1))
-                .check(matches(withText("Chloé")));
+                .check(matches(withText("Caroline")));
     }
 
+
     /**
-     *
+     *Check if the favorite neighbour list receive the favorite neighbour
      */
     @Test
     public void myNeighbourList_favoriteList_onlyFavoriteNeighbourOnList() {
@@ -129,8 +139,8 @@ public class NeighboursListTest {
         onView(allOf(withId(R.id.container), isDisplayed()))
                 .perform(scrollLeft());
         // Go on a neighbour
-        onView(allOf(withId(R.id.list_neighbours), isDisplayed()))
-                .perform(actionOnItemAtPosition(1, click()));
+        onView(withRecyclerView(R.id.list_neighbours).atPosition(1))
+                .perform(click());
         // Change the neighbour on favorite neighbour
         onView(withId(R.id.favorite_button))
                 .perform(click());

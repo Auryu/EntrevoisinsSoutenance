@@ -100,8 +100,8 @@ public class NeighboursListTest {
     @Test
     public void myNeighbourList_clickAction_shouldLaunchNeighbourProfile() {
         // When perform a click on this neighbour
-        onView(allOf(withId(R.id.list_neighbours), isDisplayed()))
-                .perform(actionOnItemAtPosition(5, click()));
+        onView(withRecyclerView(R.id.list_neighbours).atPosition(5))
+                .perform(click());
         // Check that profile page was launch
         onView(withId(R.id.name1))
                 .check(matches(isDisplayed()));
